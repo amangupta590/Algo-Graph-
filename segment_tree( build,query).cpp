@@ -21,6 +21,18 @@ int query(int idx,int low,int high,int l,int r){
     int right=query(2*idx+2,mid+1,high,l,r);
     return max(left,right);
 }
+void update(int idx,int low,int high,int changidx){
+    if(low==high){
+        seg[idx]=arr[low];
+        return;
+    }
+    int mid=(low+high)/2;
+    if(changidx<=mid)
+        update(2*idx+1,low,mid,changidx);
+    else
+        update(2*idx+2,mid+1,high,changidx);
+    seg[idx]=max(seg[2*idx+1],seg[2*idx+2]);
+}
 int main() {
     int n;
     cin>>n;
